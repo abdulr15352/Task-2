@@ -1,0 +1,18 @@
+services:
+  voting_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: voting_app_container
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    command: uvicorn main:voting_app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./:/app:ro
+      - logger_volume:/app/logs
+
+volumes:
+  logger_volume:
+
